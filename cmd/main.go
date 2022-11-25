@@ -21,7 +21,7 @@ func main() {
 	handlers := handler.NewHandler(services)
 
 	srv := new(gotodo.Server)
-	if err := srv.Run("5000", handlers.InitRoutes()); err != nil {
+	if err := srv.Run(viper.GetString("port"), handlers.InitRoutes()); err != nil {
 		log.Fatalf("Error occured while running http server: %s", err.Error())
 	}
 
