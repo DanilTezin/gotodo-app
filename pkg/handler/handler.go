@@ -28,6 +28,11 @@ func (h *Handler) InitRoutes() *gin.Engine {
 		log.Print(`ROUTE[/:GET]`)
 	})
 
+	router.POST("/", func(ctx *gin.Context) {
+		log.Print(ctx.Params)
+		log.Print("CLIENT IP: ", ctx.ClientIP())
+	})
+
 	api := router.Group("/api")
 	{
 		lists := api.Group("/lists")
