@@ -1,6 +1,8 @@
 package handler
 
 import (
+	"log"
+
 	"github.com/DanilTezin/go-todo/pkg/service"
 	"github.com/gin-gonic/gin"
 )
@@ -16,13 +18,15 @@ func NewHandler(services *service.Service) *Handler {
 func (h *Handler) InitRoutes() *gin.Engine {
 	router := gin.New()
 
-	router.GET("/")
-
 	auth := router.Group("/auth")
 	{
 		auth.POST("/sign-up", h.signUp)
 		auth.POST("/sign-in", h.signIn)
 	}
+
+	router.GET("/", func(ctx *gin.Context) {
+		log.Print(`ROUTE[/:GET]`)
+	})
 
 	api := router.Group("/api")
 	{
